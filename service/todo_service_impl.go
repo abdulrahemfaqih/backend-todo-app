@@ -25,3 +25,11 @@ func (service *TodoServiceImpl) Create(request shareddomain.RequestCreate) error
 
 	return nil
 }
+
+func (service *TodoServiceImpl) FindAll() ([]domain.Todo, error) {
+	todos, err := service.repository.FindAll()
+	if err != nil {
+		return todos, err
+	}
+	return todos, nil
+}

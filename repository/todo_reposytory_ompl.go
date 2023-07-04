@@ -20,3 +20,11 @@ func (repo *TodoRepositoryImpl) Create(todo domain.Todo) error {
 
 	return nil
 }
+func (repo *TodoRepositoryImpl) FindAll() ([]*domain.Todo, error) {
+	var todos []*domain.Todo
+	if err := repo.db.Create(&todos).Error; err != nil {
+		return todos, err
+	}
+
+	return todos, nil
+}

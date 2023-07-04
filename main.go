@@ -29,6 +29,7 @@ func main() {
 	router := gin.Default()
 	api := router.Group("/api/v1")
 	api.POST("/todo", todoResthandler.Create)
+	api.GET("/todo", todoResthandler.FindAll)
 
 	router.Run()
 }

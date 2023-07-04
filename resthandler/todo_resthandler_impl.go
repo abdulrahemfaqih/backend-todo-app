@@ -3,8 +3,9 @@ package resthandler
 import (
 	"backend-mytodo/service"
 	"backend-mytodo/shareddomain"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type TodoResthandlerImpl struct {
@@ -52,4 +53,26 @@ func (handler *TodoResthandlerImpl) Create(c *gin.Context) {
 		Message: "berhasil menambahkan todo",
 	}
 	c.JSON(http.StatusCreated, response)
+}
+
+func (handler *TodoResthandlerImpl) FindAll(c *gin.Context) {
+	todos, err := handler.service.FindAll()
+	if err != nil {
+		response := ResponseWithError{
+			Code:    http.StatusBadRequest,
+			Success: false,
+			Message: "gagal menambahkan todo",
+			Error:   err.Error(),
+		}
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	response := shareddomain.ResponseWithData{
+		Code:    http.StatusOK,
+		Success: true,
+		Message: "berhasil menambahkan todo",
+		Data:    todos,
+	}
+	c.JSON(http.StatusOK, response)
 }
