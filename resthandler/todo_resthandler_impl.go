@@ -72,7 +72,7 @@ func (handler *TodoResthandlerImpl) FindAll(c *gin.Context) {
 		Code:    http.StatusOK,
 		Success: true,
 		Message: "berhasil menambahkan todo",
-		Data:    todos,
+		Data:  todos,
 	}
 	c.JSON(http.StatusOK, response)
 }

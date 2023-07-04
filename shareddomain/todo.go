@@ -13,5 +13,5 @@ type ResponseWithData struct {
 	Code    int    `json:"code"`
 	Success bool   `json:"success"`
 	Message string `json:"message"`
-	data interface{} `json:"data"`
+	Data interface{} `json:"data"`
 }

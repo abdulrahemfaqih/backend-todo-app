@@ -5,5 +5,5 @@ import "backend-mytodo/domain"
 
 type TodoService interface {
 	Create(request shareddomain.RequestCreate) error
-	FindAll() ([]*domain.Todo, error)
+	FindAll() ([]domain.Todo, error)
 }
