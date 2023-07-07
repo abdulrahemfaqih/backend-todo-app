@@ -5,10 +5,12 @@ import (
 	"backend-mytodo/repository"
 	"backend-mytodo/resthandler"
 	"backend-mytodo/service"
+	"log"
+
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"log"
 )
 
 func main() {
@@ -27,6 +29,10 @@ func main() {
 	todoResthandler := resthandler.NewTodoResthandler(todoService)
 
 	router := gin.Default()
+	// cors middleware
+	config :=  cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	router.Use(cors.New(config))
 	api := router.Group("/api/v1")
 	api.POST("/todo", todoResthandler.Create)
 	api.GET("/todo", todoResthandler.FindAll)
